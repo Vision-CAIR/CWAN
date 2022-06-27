@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Wölfflin's Affective Generative Analysis</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/png" href="img/seal_icon.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+<div class="container" id="main">
+    <div class="row">
+
+        <h2 class="col-md-12 text-center" style="padding-bottom:20px">
+            <b>Creative Walk Adversarial Networks</br></b>
+            <span style="font-size:18pt"> Novel Art Generation with Probabilistic Random Walk Deviation from Style Norms
+            </span>
+            <br>
+            <span style="font-size:18pt"> ICCC 2022 </span>
+            <span style="font-size:18pt"> </span>
+            <br>
+        </h2>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <ul class="list-inline" style="font-size:16pt">
+                <li>
+                    <a href="https://divyanshj16.github.io/">
+                        Divyansh Jha<sup>*</sup>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#########FILL THIS UP############">
+                        Kai Yi
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#########FILL THIS UP############">
+                        Ivan Skorokhodov
+                    </a>
+                </li>                
+                
+                <li>
+                    <a href="http://www.mohamed-elhoseiny.com/">
+                        Mohamed Elhoseiny<sup>*</sup>
+                    </a>
+                </li>
+                </br>King Abdullah University of Science and Technology (KAUST)
+
+                <!-- <div>
+                    
+                    <img src="assets/kaust-logo.png" alt="KAUST" class="img-responsive img-small" style="max-height: 200px; max-width: 200px;">
+                </div> -->
+                
+           
+            </ul>
+
+        </div>
+    </div>
+
+
+    <div class="row" style="padding-top:20px">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <a href="assets/paper.pdf">
+                        <h4><strong>[ Paper ]</strong></h4>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="#video">
+                        <h4><strong>[ Video ]</strong></h4>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="https://github.com/Vision-CAIR/CWAN">
+                        <h4><strong>[ Code ]</strong></h4>
+                    </a>
+                </li>  
+                <!-- <li>
+                    <a href="https://github.com/Vision-CAIR/WAGA/tree/main/analyses_notebooks/datasets/raw">
+                        <h4><strong>[ Data ]</strong></h4>
+                    </a>
+                </li>                                               -->
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Abstract</b>
+            </h3>
+            <p class="text-justify">
+                We propose <i>Creative Walk Adversarial Networks
+                (CWAN)</i> for novel art generation. Quality learning representation of unseen art styles is critical to facilitate
+                generation of new meaningful artworks. CWAN learns
+                an improved metric space for generative art by exploring unseen visual spaces with probabilistic random
+                walks. CWAN constructs a dynamic graph that includes
+                the seen art style centers and generated samples in the
+                current minibatch. We then initiate a random walk from
+                each art style center through the generated artworks in
+                the current minibatch. As a deviation signal, we encourage the random walk to eventually land after T steps
+                in a feature representation that is difficult to classify as
+                any of the seen art styles. We investigate the ability
+                of the proposed loss to generate meaningful novel visual art on the WikiArt dataset. Our experimental results and human evaluations demonstrate that CWAN
+                can generate novel art that is significantly more preferable compared to strong state-of-the-art methods, including StyleGAN2 and StyleCAN2.
+            
+            </p>
+            <figure style='border:1px solid #cfcdcd;' >
+                <img src="assets/figure1_cwan.jpg" alt="teaser1" style="width: 748px;"/>
+                <hr>
+                <figcaption style="font-size:12pt; text-align: center;">
+                    <h5>Art images on left with orange borders are generated using Creative Walk Adversarial Networks. The right part shows
+the Nearest Neighbors (NN) from the training set on the WikiArt dataset (with green borders), which are different indicating
+our generations’ novelty. Nearest neighbor distance is computed on ResNet-18 space (He et al. 2016).</h5>
+                </figcaption>
+                <!-- <caption>.</caption> -->
+            </figure>
+        </div>
+    </div>
+
+
+    <!-- <div class="row" id="video" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Video</b>
+            </h3>
+           <video id="v0" width="100%" loop="" muted="" controls="">
+               <source src="assets/waga_longer.mp4" type="video/mp4">
+           </video>
+
+        </div>
+
+    </div> -->
+
+    
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Motivation</b>
+            </h3>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <ol>
+                <li>
+                    Creative art spaces have been explored in previous works like <i>Creative Adversarial Networks</i>. The spaces
+                    explored in those works are local in nature i.e they are based on a per example basis. Also there was no supervision
+                    in the deviation loss exploring more the creative space. Rather, Creative Walks takes a global view of the data manifold.
+                    Creative Walks can be connected to recent advances in semi-supervised learning, that leverage unlabeled data within the training classes.
+                    The deviation is guided and is based on the current minibatch. The goal is the landing representation to be distant and distinguishable 
+                    from the seen art style centers but still be likeable.
+                </li>
+                <li>
+                    We also want to compare the performance of this random walk based deviation loss to the existing works and compare their performances.
+
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Contributions</b>
+            </h3>
+        </div>
+
+        <div class="col-md-8 col-md-offset-2">
+            <ol>
+                <li>
+                    We propose Creative Walk Adversarial Networks(CWAN) for novel art generation. CWANs augment state-of-the-art adversarial generative models with a Creative Walk loss that learns an improved metric space for novel art generation.
+                </li>
+                <li>
+                    The loss generatively explores unseen art discriminatively against the existing art style classes. The augmented loss is unsupervised on the generative space and can be applied to any GAN architectures; e.g., DCGAN (Radford, Metz, and Chintala 2016), StyleGAN (Karras, Laine, and Aila 2019a), and StyleGAN2 (Karras et al. 2020).
+                </li>
+                <li>
+                    We show that Creative Walk Adversarial Networks helps understand unseen visual styles better, improving the generative capability in unseen space of liked art as compared to state-of-the-art baselines including StyleGAN2 (Karras et al. 2020) and StyleCAN2 (Jha, Chang, and Elhoseiny 2021)                    
+                </li>
+                <!-- <li>
+                    Using the collected data, we performed detailed analysis that
+                    contrast real art and AI art based on Wolfflin’s principles,
+                    constructed emotion categories, and corresponding explanations. We also observed connections between Wolfflin’s ¨
+                    principles and the constructed emotional experiences.                    
+                </li> -->
+            </ol>
+        </div>
+    </div>    
+
+
+    <!-- <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Wölfflin's principles collection interfaces</b>
+            </h3>
+            Heinrich Wölfflin (a swiss art historian) formulated five pairs of opposed or contrary precepts in the form and style of art of the 
+            sixteenth and seventeenth centuries which demonstrated a shift in the nature of artistic vision between the two periods. To collect these principles
+            we trained the Amazon Mechanical Turkers using some sample examples. The user interface created for each is linked below.         
+
+            
+        </div> -->
+
+
+        <!-- <div class="col-md-8 col-md-offset-2 text-center" style="padding-top:30px">
+            <ul class="nav nav-pills nav-justified">
+                <li>
+                    <a href="linearly-vs-painterly.html">
+                        <h4><strong>Linearly vs Painterly</strong></h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="planar_recessional.html">
+                        <h4><strong>Planar vs Recessional</strong></h4>
+                    </a>
+                </li>
+                <li>
+                    <a href="closed-open-form.html">
+                        <h4><strong>Closed-form vs Open-form
+                        </strong></h4>
+                    </a>
+                </li> 
+                <li>
+                    <a href="multiplicity-unity.html">
+                        <h4><strong>Multiplicity vs Unity
+
+                        </strong></h4>
+                    </a>
+                </li>    
+                <li>
+                    <a href="absolute-relative-clarity.html">
+                        <h4><strong>Absolute clarity vs Relative clarity
+                        </strong></h4>
+                    </a>
+                </li>                                                  
+            </ul>
+        </div>   
+
+    </div>   -->
+    
+    
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>StyleCWAN</b>
+            </h3>
+
+            <img src="assets/method_figure.jpg" class="img-responsive" alt="StyleCAN">
+
+            Creative Walk loss starts from each seen style class center (i.e., pi). It then performs a random walk 
+            through generated examples of hallucinated unseen classes using G(z) for T steps. The landing 
+            probability distribution of the random walk is encouraged to be uniform over the seen classes. 
+            For careful deviation from seen classes, the generated images are encouraged to be classified as 
+            real by the Discriminator D. H indicates relative entropy.
+
+            <hr>
+
+            <h3>
+                <b>Some sample generations from StyleGAN1 + CWAN</b>
+            </h3>            
+
+            <img src="assets/most_liked_1disliked.png" class="img-responsive" alt="StyleCAN">
+
+            <hr>
+
+            <h3>
+                <b>Some sample generations from StyleGAN2 + CWAN</b>
+            </h3>            
+
+            <img src="assets/most_liked_disliked_st2.png" class="img-responsive" alt="StyleCAN">            
+            
+        </div>
+
+        
+        
+    </div>
+    
+    
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Likeability experiments</b>
+            </h3>
+            
+            <div style="padding-bottom:30px">
+            <img src="assets/likeability_exp.png" style="border:1px solid; padding-bottom:20px" class="img-responsive" alt=""/>
+
+            </div>
+
+            <div style="padding-bottom:30px">
+
+                We conducted likeability survey and asked the following two questions.
+                <ol>
+                    <li>
+                        How much do you like this image? (on a scale of 5)
+                    </li>
+                    <li>
+                        Do you think this image was created by artist or generated by computer?
+                    </li>
+                </ol>
+                The table below summarizes the results from this experiments. The art 
+                generated by CAN loss models are more likeable and more people believed
+                it to be generated by real artists.
+
+            </div>
+
+            <h4>Results</h4>
+
+            <img src="assets/likeability_table.jpg" class="img-responsive" alt=""/>
+        </div>
+    </div>
+
+
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Emotion experiments</b>
+            </h3>
+            
+            <div style="padding-bottom:30px">
+            <img src="assets/emotion_exp.png" style="border:1px solid; padding-bottom:20px" class="img-responsive" alt=""/>
+
+            </div>
+
+            <div style="padding-bottom:30px">
+
+                We collected emotions using the above interface and and in text why the viewer felt the way they felt.
+                The histogram of emotions for different models is presented below.
+
+            </div>
+
+            <h4>Results</h4>
+
+            <img src="assets/pie_chart.jpg" class="img-responsive" alt=""/>
+            <div></div>
+            <p>
+                Distribution of emotional responses for generated art from StyleGAN1 + CWAN. 
+                Example image for fear, awe, and contentment is shown. The box beneath shows the 
+                most frequent words used by evaluators to describe their feeling. These responses were 
+                collected from a survey on Amazon Mechanical Turk.
+            </p>
+
+        </div>
+
+    </div>    
+    
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Comparison analyses</b>
+            </h3>
+
+            <img src="assets/comparison_experiment.jpg" style="padding-bottom:20px" class="img-responsive" alt=""/>
+            <div>We did comparison analyses using the interface above. 
+                For fair comparison we selected nearest neighbour image from both image groups.</div>
+
+            <h4>
+                Results
+            </h4>
+
+            <img src="assets/comparison_results.jpg" style="padding-bottom:20px" class="img-responsive" alt=""/>
+
+
+            
+            <!-- <div style="padding-bottom:30px">
+                <img src="assets/corr.png" style="padding-bottom:20px" class="img-responsive" alt=""/>
+                Pearson's correlation coefficients of features of various architectures on real art and generated art 
+                computed for all the Wölfflin principles. The term ""vs" is used in the table to compare opposing 
+                concepts of each Wölfflin principle.                
+            </div>
+            <hr>
+            <div style="padding-bottom:30px">
+                <img src="assets/emo_corr.png" style="padding-bottom:20px" class="img-responsive" alt=""/>
+                Weights of  the linear classifier when trained on Wölfflin's principle to different emotions.
+                 The term "vs" is used in the table to compare opposing concepts of each Wölfflin principle.
+                 People feel amused when the painting is more towards "Multiplicity" than "Unity." because of the 
+                 negative correlation. Similarly, people feel anger when the artwork has more "Relative Clarity" 
+                 than "Absolute Clarity"". We can find more such correlations from the table.
+            </div>             -->
+
+        </div>
+       
+        
+    </div>
+
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Wundt Curve Approximation</b>
+            </h3>
+
+            <img src="assets/wundt_analyses.jpg" style="padding-bottom:20px" class="img-responsive" alt=""/>
+            <div>
+                Empirical approximation of Wundt Curve (Packard 1975; Wundt 1874). 
+                The color of the data point represents a specific model and its label specifies 
+                the group named according to nomenclature. Art from the NN ↑ group has lower likeability 
+                than the NN ↓ group. Examples of a high and low likeability artwork and its novelty are shown. 
+                The NN distance is computed from features of resnet-18 and are normalized by scaling down by 
+                20 (to be < 1). We select 20 because it was around the higher NN distances we observe in our generations.
+            </div>
+
+
+        </div>
+       
+        
+    </div>    
+
+    <div class="row" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Key observations</b>
+            </h3>
+            
+            <ol>
+                <li>
+                    The creative walk loss used in CWAN has performed better than CAN on two SOTA base architectures i.e. StyleGAN1 and StyleGAN2.                  
+                </li>
+                <li>
+                    We find that the artworks generated by our proposed CWAN model are more likeable than those artworks by CAN in all the evaluation groups.                   
+                </li>
+                <li>
+                    We see that artworks by CWAN have a significantly higher percentage of people giving a rating of 5 and least amount for people giving a rating of 1.                   
+                </li>
+                <li>
+                    We approximated the Wundt Curve from art- works generated from CWAN.
+                </li>
+            </ol>
+
+        </div>
+       
+        
+    </div>    
+    
+        <div class="row" id="citation" style="padding-bottom:30px">
+        <div class="col-md-8 col-md-offset-2">
+            <h3>
+                <b>Citation</b>
+            </h3>
+            If you find our work useful in your research, please consider citing:
+        <pre class="w4-panel w4-centerbar w4-light-grey" style="font-size: 11px">
+@article{djcwan,
+title={Creative Walk Adversarial Networks: Novel Art Generation with Probabilistic Random Walk Deviation from Style Norms},
+author={Jha, Divyansh and Yi, Kai and Skorokhodov, Ivan and Elhoseiny, Mohamed},
+journal={The International Conference on Computational Creativity (ICCC)},
+year={2022}
+}
+</pre>
+        </div>
+    </div>
+
+</html>
